@@ -1,0 +1,20 @@
+
+<h1>My Journal Publications</h1>
+<hr>
+<button><a href="{% url 'options' %}">Go back</a></button><br><br>
+<button><a href="{% url 'journ-create' %}">Add Journal</a></button>
+
+<table border="10">
+    <tr>
+        <th>Journal name</th>
+        <th>View</th>
+    </tr>
+    {% for i in journal %}
+    <tr>
+        <td>{{i.journal_name}}</td>
+        <td><a href="{% url 'journals' %}">View</a></td> 
+    </tr>
+    {% empty %}
+    <h3>No items in the list</h3>
+    {% endfor %}
+</table>

@@ -1,0 +1,21 @@
+
+
+<h1>My Conference Publications</h1>
+<hr>
+
+<button><a href="{% url 'options' %}">Go back</a></button><br><br>
+<button><a href="{% url 'conf-create' %}">Add Conference</a></button>
+<table border="10">
+    <tr>
+        <th>Conference name</th>
+        <th>View</th>
+    </tr>
+    {% for i in conference %}
+    <tr>
+        <td>{{i.conference_name}}</td>
+        <td><a href="{% url 'conferences' %}">View</a></td> 
+    </tr>
+    {% empty %}
+    <h3>No items in the list</h3>
+    {% endfor %}
+</table>
