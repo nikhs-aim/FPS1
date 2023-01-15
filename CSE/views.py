@@ -8,6 +8,7 @@ from django.contrib.auth import login
 from django.urls import reverse_lazy
 from .forms import RegistrationForm
 
+
 ############################################################################################################################
 
 def Options(request):
@@ -17,28 +18,43 @@ def Options(request):
      
     
 def conference_details(request):
-    conferences = Conference.objects.all()
+    if request.user.is_authenticated:
+        conferences = Conference.objects.filter(fac_name=request.user)
+    else:
+        conferences = Conference.objects.all()
     return render(request, 'conferencedetail.html', {'conferences': conferences})
 
 
-class conferencecreate(CreateView):      
+class conferencecreate(CreateView):
     model=Conference
-    fields="__all__"
+    fields = ['conference_id', 'conference_name', 'conference_article', 'conference_doi', 'ugc_listed']
     template_name='conferencecreate.html'
-    success_url=reverse_lazy('conferences')      
+    success_url=reverse_lazy('conferences')
+   
+    def form_valid(self, form):
+        form.instance.fac_name = self.request.user
+        return super().form_valid(form)    
   
 ##########################################################################################################################
     
      
 def journal_details(request):
-    journals = Journal.objects.all()
-    return render(request, 'journaldetail.html', {'journals':journals})
+    if request.user.is_authenticated:
+        journals = Journal.objects.filter(fac_name=request.user)
+    else:
+        journals = Journal.objects.all()
+    return render(request, 'journaldetail.html', {'journals': journals})
 
-class journalcreate(CreateView):      
+class journalcreate(CreateView):
     model=Journal
-    fields="__all__"
+    fields = ['journal_id', 'journal_name', 'journal_article', 'journal_doi', 'ugc_listed']
     template_name='journalcreate.html'
-    success_url=reverse_lazy('journals')      
+    success_url=reverse_lazy('journals')
+   
+    def form_valid(self, form):
+        form.instance.fac_name = self.request.user
+        return super().form_valid(form)
+ 
 
 ##########################################################################################################################
 
@@ -61,11 +77,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            message = "You have logged in successfully"
-            if 'next' in request.POST:
-                return redirect(request.POST.get('next'))
-            else:
-                return redirect('success_login', message=message)
+            return redirect('options')
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})

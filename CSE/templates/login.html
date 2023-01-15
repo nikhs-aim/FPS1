@@ -1,11 +1,6 @@
-
-
-    <!-- login.html -->
-
-
-
-    <h2>Login</h2>
-    <form method="post">
+<h1>Login</h1>
+<hr>
+    <form method="post" autocomplete="off">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Login">

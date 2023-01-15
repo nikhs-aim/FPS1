@@ -2,7 +2,7 @@ from django.db import models
 import uuid
 from django.core.exceptions import ValidationError
 import os,bcrypt,uuid,re
-
+from django.contrib.auth.models import User
 
 ##########################################################################################################################
 
@@ -15,6 +15,7 @@ def validate_pdf(value):
 ##########################################################################################################################
 
 class Conference(models.Model):
+    fac_name=models.ForeignKey(User,on_delete=models.CASCADE)
     conference_id = models.CharField(primary_key=True,max_length=100)
     conference_name = models.CharField(max_length=255)
     conference_article = models.FileField(upload_to='conferences/',validators=[validate_pdf])
@@ -28,6 +29,7 @@ class Conference(models.Model):
 ##########################################################################################################################
 
 class Journal(models.Model):
+    fac_name=models.ForeignKey(User,on_delete=models.CASCADE)
     journal_id = models.CharField(primary_key=True,max_length=100)
     journal_name = models.CharField(max_length=255)
     journal_article = models.FileField(upload_to='journals/',validators=[validate_pdf])

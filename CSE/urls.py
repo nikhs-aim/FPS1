@@ -7,7 +7,7 @@ urlpatterns = [
     path('conferences/', conference_details, name='conferences'),
     path('conf-create/',conferencecreate.as_view(),name='conf-create'),
     path('journals/', journal_details, name='journals'),
-    path('journal-create/',journalcreate.as_view(),name='journ-create'),
+    path('journ-create/',journalcreate.as_view(),name='journ-create'),
     path('logout/',LogoutView.as_view(next_page='login'),name='logout'),
     path('options',Options,name='options'),
      path('register/', views.registration_view, name='register'),
