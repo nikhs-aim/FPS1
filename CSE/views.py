@@ -12,11 +12,6 @@ def Options(request):
     return render(request,'options.html')
 
 ##########################################################################################################################
-
-class conferencelist(ListView):
-    model=Conference
-    context_object_name='conference' 
-    template_name='conferencelist.html'
      
     
 def conference_details(request):
@@ -28,14 +23,10 @@ class conferencecreate(CreateView):
     model=Conference
     fields="__all__"
     template_name='conferencecreate.html'
-    success_url=reverse_lazy('conference')      
+    success_url=reverse_lazy('conferences')      
 
 ##########################################################################################################################
     
-class journallist(ListView):
-    model=Journal
-    context_object_name='journal' 
-    template_name='journallist.html'
      
 def journal_details(request):
     journals = Journal.objects.all()
@@ -45,6 +36,6 @@ class journalcreate(CreateView):
     model=Journal
     fields="__all__"
     template_name='journalcreate.html'
-    success_url=reverse_lazy('journal')      
+    success_url=reverse_lazy('journals')      
 
 ##########################################################################################################################
