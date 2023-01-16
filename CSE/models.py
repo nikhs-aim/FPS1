@@ -1,5 +1,4 @@
 from django.db import models
-import uuid
 from django.core.exceptions import ValidationError
 import os,bcrypt,uuid,re
 from django.contrib.auth.models import User

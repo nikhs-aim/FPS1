@@ -12,7 +12,7 @@ urlpatterns = [
     path('options',Options,name='options'),
      path('register/', views.registration_view, name='register'),
     path('login/', views.login_view, name='login'),
-    path('success_login/<str:message>', views.success_login, name='success_login'),
+   
 ]
     
 
@@ -33,15 +33,6 @@ urlpatterns = [
 
 
 
-
-
-# {% if request.user.is_authenticated %}
-# <p>{{request.user}}</p>
-# <a href="{% url 'logout' %}">Logout</a>
-# {% else %}
-# <a href="{% url 'login' %}">Login</a>
-# {% endif %}
-# <hr>
 
 
 

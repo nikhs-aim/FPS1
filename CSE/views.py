@@ -86,8 +86,7 @@ def login_view(request):
 
 ##########################################################################################################################
 
-def success_login(request, message):
-    return render(request, 'success_login.html', {'message': message})
+
 
 
 
